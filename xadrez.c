@@ -1,33 +1,44 @@
 #include <stdio.h>
 
 // =====================================================
-// FUNÇÕES RECURSIVAS — Torre, Bispo, Rainha
+// FUNÇÕES RECURSIVAS — com seus tipos de loop originais
 // =====================================================
 
-// Função recursiva para a Torre (movimento horizontal)
+// Função recursiva da Torre (usa FOR)
 void moverTorre(int atual, int limite) {
     if (atual > limite) return;
-    printf("Direita (%d)\n", atual);
-    moverTorre(atual + 1, limite);
+
+    // usa um pequeno for interno só para seguir o padrão da torre (for)
+    for (int i = atual; i <= atual; i++) {
+        printf("Direita (%d)\n", i);
+    }
+
+    moverTorre(atual + 1, limite); // chamada recursiva
 }
 
-// Função recursiva para a Rainha (movimento horizontal)
+// Função recursiva da Rainha (usa DO-WHILE)
 void moverRainha(int atual, int limite) {
     if (atual > limite) return;
-    printf("Esquerda (%d)\n", atual);
+
+    int contador = atual;
+    do {
+        printf("Esquerda (%d)\n", contador);
+        break; // evita loop infinito (executa uma vez por chamada)
+    } while (contador <= limite);
+
     moverRainha(atual + 1, limite);
 }
 
-// Função recursiva para o Bispo (movimento diagonal)
+// Função recursiva do Bispo (usa WHILE + loops aninhados)
 void moverBispo(int linha, int maxLinha, int maxColuna) {
     if (linha > maxLinha) return;
 
-    // Loop interno horizontal
-    for (int coluna = 1; coluna <= maxColuna; coluna++) {
-        printf("Cima, Direita (%d,%d)\n", linha, coluna);
+    int col = 1;
+    while (col <= maxColuna) {
+        printf("Cima, Direita (%d,%d)\n", linha, col);
+        col++;
     }
 
-    // Chamada recursiva vertical
     moverBispo(linha + 1, maxLinha, maxColuna);
 }
 
@@ -38,17 +49,15 @@ void moverCavalo() {
     printf("\n=== Movimento do Cavalo ===\n");
     printf("Movimento em L: Duas casas para cima e uma para a direita\n");
 
-    // i controla o movimento vertical, j o horizontal
+    // Movimento em "L": 2 pra cima + 1 pra direita
     for (int i = 1; i <= 2; i++) {
         printf("Cima (%d)\n", i);
 
-        // Quando termina o segundo movimento vertical, faz o movimento horizontal
         if (i == 2) {
-            for (int j = 1; j <= 1; j++) {
-                if (j == 1) {
-                    printf("Direita (%d)\n", j);
-                    break; // apenas uma casa para a direita
-                }
+            int j = 1;
+            while (j <= 1) {
+                printf("Direita (%d)\n", j);
+                break;
             }
         }
     }
