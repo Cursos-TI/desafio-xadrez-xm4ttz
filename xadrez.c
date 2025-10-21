@@ -6,9 +6,9 @@
 
 // Função recursiva para a Torre (movimento horizontal)
 void moverTorre(int atual, int limite) {
-    if (atual > limite) return; // condição de parada
+    if (atual > limite) return;
     printf("Direita (%d)\n", atual);
-    moverTorre(atual + 1, limite); // chamada recursiva
+    moverTorre(atual + 1, limite);
 }
 
 // Função recursiva para a Rainha (movimento horizontal)
@@ -18,18 +18,17 @@ void moverRainha(int atual, int limite) {
     moverRainha(atual + 1, limite);
 }
 
-// Função recursiva para o Bispo
-// Aqui o movimento é diagonal: Cima + Direita
-// Usamos loops aninhados dentro da recursão
+// Função recursiva para o Bispo (movimento diagonal)
 void moverBispo(int linha, int maxLinha, int maxColuna) {
     if (linha > maxLinha) return;
 
-    // Loop interno (horizontal)
+    // Loop interno horizontal
     for (int coluna = 1; coluna <= maxColuna; coluna++) {
         printf("Cima, Direita (%d,%d)\n", linha, coluna);
     }
 
-    moverBispo(linha + 1, maxLinha, maxColuna); // recursão vertical
+    // Chamada recursiva vertical
+    moverBispo(linha + 1, maxLinha, maxColuna);
 }
 
 // =====================================================
@@ -39,21 +38,19 @@ void moverCavalo() {
     printf("\n=== Movimento do Cavalo ===\n");
     printf("Movimento em L: Duas casas para cima e uma para a direita\n");
 
-    // Loops aninhados com múltiplas variáveis e controle de fluxo
-    for (int i = 1, j = 0; i <= 2 || j <= 1; i++, j++) {
-        // Movimento vertical (duas casas para cima)
-        if (i <= 2) {
-            printf("Cima (%d)\n", i);
-            continue; // volta para o início do loop sem executar o resto
-        }
+    // i controla o movimento vertical, j o horizontal
+    for (int i = 1; i <= 2; i++) {
+        printf("Cima (%d)\n", i);
 
-        // Movimento horizontal (uma casa à direita)
-        for (int k = 1; k <= 1; k++) {
-            printf("Direita (%d)\n", k);
-            break; // sai após uma casa
+        // Quando termina o segundo movimento vertical, faz o movimento horizontal
+        if (i == 2) {
+            for (int j = 1; j <= 1; j++) {
+                if (j == 1) {
+                    printf("Direita (%d)\n", j);
+                    break; // apenas uma casa para a direita
+                }
+            }
         }
-
-        if (i > 2 && j > 1) break; // evita loop infinito
     }
 }
 
@@ -61,7 +58,6 @@ void moverCavalo() {
 // PROGRAMA PRINCIPAL
 // =====================================================
 int main() {
-    // Movimentos definidos diretamente no código
     int casasTorre = 5;
     int casasRainha = 8;
     int linhasBispo = 3;
@@ -81,4 +77,3 @@ int main() {
     printf("\n=== Fim da Simulação ===\n");
     return 0;
 }
-
