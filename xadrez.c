@@ -1,32 +1,84 @@
 #include <stdio.h>
 
-// Desafio de Xadrez - MateCheck
-// Este código inicial serve como base para o desenvolvimento do sistema de movimentação das peças de xadrez.
-// O objetivo é utilizar estruturas de repetição e funções para determinar os limites de movimentação dentro do jogo.
+// =====================================================
+// FUNÇÕES RECURSIVAS — Torre, Bispo, Rainha
+// =====================================================
 
+// Função recursiva para a Torre (movimento horizontal)
+void moverTorre(int atual, int limite) {
+    if (atual > limite) return; // condição de parada
+    printf("Direita (%d)\n", atual);
+    moverTorre(atual + 1, limite); // chamada recursiva
+}
+
+// Função recursiva para a Rainha (movimento horizontal)
+void moverRainha(int atual, int limite) {
+    if (atual > limite) return;
+    printf("Esquerda (%d)\n", atual);
+    moverRainha(atual + 1, limite);
+}
+
+// Função recursiva para o Bispo
+// Aqui o movimento é diagonal: Cima + Direita
+// Usamos loops aninhados dentro da recursão
+void moverBispo(int linha, int maxLinha, int maxColuna) {
+    if (linha > maxLinha) return;
+
+    // Loop interno (horizontal)
+    for (int coluna = 1; coluna <= maxColuna; coluna++) {
+        printf("Cima, Direita (%d,%d)\n", linha, coluna);
+    }
+
+    moverBispo(linha + 1, maxLinha, maxColuna); // recursão vertical
+}
+
+// =====================================================
+// MOVIMENTO COMPLEXO DO CAVALO (loops aninhados)
+// =====================================================
+void moverCavalo() {
+    printf("\n=== Movimento do Cavalo ===\n");
+    printf("Movimento em L: Duas casas para cima e uma para a direita\n");
+
+    // Loops aninhados com múltiplas variáveis e controle de fluxo
+    for (int i = 1, j = 0; i <= 2 || j <= 1; i++, j++) {
+        // Movimento vertical (duas casas para cima)
+        if (i <= 2) {
+            printf("Cima (%d)\n", i);
+            continue; // volta para o início do loop sem executar o resto
+        }
+
+        // Movimento horizontal (uma casa à direita)
+        for (int k = 1; k <= 1; k++) {
+            printf("Direita (%d)\n", k);
+            break; // sai após uma casa
+        }
+
+        if (i > 2 && j > 1) break; // evita loop infinito
+    }
+}
+
+// =====================================================
+// PROGRAMA PRINCIPAL
+// =====================================================
 int main() {
-    // Nível Novato - Movimentação das Peças
-    // Sugestão: Declare variáveis constantes para representar o número de casas que cada peça pode se mover.
+    // Movimentos definidos diretamente no código
+    int casasTorre = 5;
+    int casasRainha = 8;
+    int linhasBispo = 3;
+    int colunasBispo = 3;
 
-    // Implementação de Movimentação do Bispo
-    // Sugestão: Utilize uma estrutura de repetição para simular a movimentação do Bispo em diagonal.
+    printf("=== Movimento da Torre ===\n");
+    moverTorre(1, casasTorre);
 
-    // Implementação de Movimentação da Torre
-    // Sugestão: Utilize uma estrutura de repetição para simular a movimentação da Torre para a direita.
+    printf("\n=== Movimento do Bispo ===\n");
+    moverBispo(1, linhasBispo, colunasBispo);
 
-    // Implementação de Movimentação da Rainha
-    // Sugestão: Utilize uma estrutura de repetição para simular a movimentação da Rainha para a esquerda.
+    printf("\n=== Movimento da Rainha ===\n");
+    moverRainha(1, casasRainha);
 
-    // Nível Aventureiro - Movimentação do Cavalo
-    // Sugestão: Utilize loops aninhados para simular a movimentação do Cavalo em L.
-    // Um loop pode representar a movimentação horizontal e outro vertical.
+    moverCavalo();
 
-    // Nível Mestre - Funções Recursivas e Loops Aninhados
-    // Sugestão: Substitua as movimentações das peças por funções recursivas.
-    // Exemplo: Crie uma função recursiva para o movimento do Bispo.
-
-    // Sugestão: Implemente a movimentação do Cavalo utilizando loops com variáveis múltiplas e condições avançadas.
-    // Inclua o uso de continue e break dentro dos loops.
-
+    printf("\n=== Fim da Simulação ===\n");
     return 0;
 }
+
