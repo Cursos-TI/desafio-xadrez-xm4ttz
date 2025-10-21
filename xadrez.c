@@ -1,7 +1,7 @@
 #include <stdio.h>
 
 // =====================================================
-// FUNÇÕES RECURSIVAS — com seus tipos de loop originais
+// FUNÇÕES RECURSIVAS
 // =====================================================
 
 // Função recursiva da Torre (usa FOR)
